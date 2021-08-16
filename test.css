@@ -16,7 +16,7 @@ section:not(:first-of-type, .gallery), .caption {
 #nohero { background-color: white; }
 
 .background {
-	background: url('../images/north-spitzberg-fjord-svalbard-jan-mayen-islands-934p_l.jpeg') center/cover no-repeat;
+	background: url('north-spitzberg-fjord-svalbard-jan-mayen-islands-934p_l.jpeg') center/cover no-repeat;
 	filter: brightness(.5);
 	position: fixed;
 	z-index: -1;
