@@ -1,6 +1,6 @@
 console.log('test');
 var x = document.querySelector(".rena");
-x.src = 'images/bartek-luks-WdOy7H9OXxY-unsplash.jpg';
+x.src = '../media/images/bartek-luks-WdOy7H9OXxY-unsplash.jpg';
 
 // (function pinga() {
 // 	fetch('images/bartek-luks-WdOy7H9OXxY-unsplash.jpg')
