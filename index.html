@@ -5,24 +5,160 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<!-- <script type="module" src="index.js"></script> -->
 	<style>
-		div {
-			width: 50vw;
-			height: 30vh;
-			background-color: rgb(255, 59, 59);
-			text-align: center;
-		}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-		p {
-			font-size: 1.35vw;
-			white-space: nowrap;
-		}
+button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+.foreground {
+  background-color: #232323;
+}
+
+.texto {
+  position: absolute;
+  bottom: 7%;
+}
+.texto svg {
+  display: none;
+}
+.texto p {
+  font-size: 2.5vw;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+
+.control-btn {
+  flex-shrink: 0;
+  margin-right: 14px;
+}
+
+.unlock {
+  position: relative;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+.unlock__bottom {
+  justify-content: center;
+  align-items: center;
+  /* font-size: 1.13em; */
+}
+
+.hold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 36%;
+  background-color: rgba(0, 0, 0, 0.8666666667);
+}
+
+.news {
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  width: 44%;
+  color: white;
+}
+.news__text {
+  /* margin-top: auto; */
+  /* background-color: red; */
+  align-items: center;
+}
+
+.menu {
+  height: 100%;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+
+html {
+  font-family: "Montserrat", sans-serif;
+  color: #232323;
+}
+
+#screen {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: #ebebeb;
+  overflow: hidden;
+}
+
+.top {
+  position: absolute;
+  top: 0;
+  justify-content: flex-end;
+  width: 100%;
+  height: 10%;
+}
 	</style>
 </head>
 <body>
-	<div>
-		<p>This is a banana my brother in my brother in christ lmao subscribe renamon akbarsito</p>
+	<div id="screen">
+		<div class="lockscren menu flex">
+			<div class="news menu foreground flex">
+				<div class="news__text flex texto">
+					<svg class="control-btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="20" cy="20" r="20" fill="white"/>
+						<path d="M9.82714 9.34844H14.2909L19.6283 19.0004H19.8413L25.1787 9.34844H29.6425L21.7057 23.0274V31.1666H17.7639V23.0274L9.82714 9.34844Z" fill="#232323"/>
+					</svg>
+					<p>Feautured News</p>
+				</div>
+			</div>
+			<div class="unlock flex">
+				<div class="top flex">
+					<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="15" cy="15" r="15" fill="#232323"/>
+						<path d="M10.5904 22.625H7.42631L13.1871 6.26136H16.8466L22.6154 22.625H19.4513L15.0808 9.61719H14.9529L10.5904 22.625ZM10.6942 16.209H19.3235V18.59H10.6942V16.209Z" fill="white"/>
+					</svg>
+					<p>Continue</p>
+				</div>
+				<button>
+					<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M160 80C160 124.183 124.183 160 80 160C35.8172 160 0 124.183 0 80C0 35.8172 35.8172 0 80 0C124.183 0 160 35.8172 160 80ZM8.00014 80C8.00014 119.764 40.2356 152 80 152C119.764 152 152 119.764 152 80C152 40.2356 119.764 8.00014 80 8.00014C40.2356 8.00014 8.00014 40.2356 8.00014 80Z" fill="#232323"/>
+						<path d="M78.7321 38.6861C79.4694 38.0819 80.5306 38.0819 81.2678 38.6861L121.317 71.5119C122.77 72.7028 121.928 75.0587 120.049 75.0587H39.9505C38.0718 75.0587 37.2296 72.7028 38.6826 71.5119L78.7321 38.6861Z" fill="#232323"/>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M66.8236 74.2856H49.8824V113.882H66.8236H93.1766H110.118V74.2856H93.1766H66.8236ZM66.8236 97.8823V77.1764H93.1766V97.8823H66.8236Z" fill="#232323"/>
+					</svg>
+				</button>
+				<div class="unlock__bottom flex texto">
+					<svg class="control-btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="20" cy="20" r="20" fill="#232323"/>
+						<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+					</svg>
+					<p>Continue</p>
+				</div>
+			</div>
+		</div>
+		<div class="home menu hidden"></div>
+		<div class="hold menu hidden"></div>
 	</div>
-	<p>This is NOT a banana my brother in.</p>
 </body>
 </html>
