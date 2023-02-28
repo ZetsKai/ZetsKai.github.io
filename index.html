@@ -152,35 +152,6 @@ html {
   overflow: hidden;
 }
 	</style>
-	<script defer>
-		"use strict";
-var _a;
-const DATE = new Date();
-let hour = 12;
-let minute = DATE.getMinutes();
-let amOrPm = 'am';
-if (hour >= 12)
-    amOrPm = 'pm';
-if (hour > 12)
-    hour = hour - 12;
-else if (hour < 10)
-    hour = `0${hour}`;
-if (minute < 10)
-    minute = `0${minute}`;
-document.querySelector('.status__time').innerHTML = `${hour}:${minute}${amOrPm}`;
-const BATTERY = navigator.getBattery().then(battery => {
-    document.querySelector('.status__battery').innerHTML = Math.ceil(battery.level * 100) + '%';
-    if (battery.charging == true)
-        document.querySelector('.status__battery').style.color = 'lime';
-    if (battery.level <= 0.2)
-        document.querySelector('.status__battery').style.color = 'red';
-});
-(_a = document.querySelector('button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
-    document.querySelector('.news').classList.toggle('hidden');
-    document.querySelector('.status').classList.toggle('hidden');
-});
-//# sourceMappingURL=index.js.map
-	</script>
 </head>
 <body>
 	<div id="screen">
@@ -228,5 +199,33 @@ const BATTERY = navigator.getBattery().then(battery => {
 		<div class="home menu hidden"></div>
 		<div class="hold menu hidden"></div>
 	</div>
+	<script>
+		console.log(document.querySelector('.status__time'));
+var _a;
+const DATE = new Date();
+let hour = 12;
+let minute = DATE.getMinutes();
+let amOrPm = 'am';
+if (hour >= 12)
+    amOrPm = 'pm';
+if (hour > 12)
+    hour = hour - 12;
+else if (hour < 10)
+    hour = `0${hour}`;
+if (minute < 10)
+    minute = `0${minute}`;
+document.querySelector('.status__time').innerHTML = `${hour}:${minute}${amOrPm}`;
+const BATTERY = navigator.getBattery().then(battery => {
+    document.querySelector('.status__battery').innerHTML = Math.ceil(battery.level * 100) + '%';
+    if (battery.charging == true)
+        document.querySelector('.status__battery').style.color = 'lime';
+    if (battery.level <= 0.2)
+        document.querySelector('.status__battery').style.color = 'red';
+});
+(_a = document.querySelector('button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', () => {
+    document.querySelector('.news').classList.toggle('hidden');
+    document.querySelector('.status').classList.toggle('hidden');
+});
+	</script>
 </body>
 </html>
