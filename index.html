@@ -203,7 +203,7 @@ html {
 		console.log(document.querySelector('.status__time'));
 var _a;
 const DATE = new Date();
-let hour = 12;
+let hour = DATE.getHours();
 let minute = DATE.getMinutes();
 let amOrPm = 'am';
 if (hour >= 12)
