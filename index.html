@@ -231,41 +231,41 @@ html {
 		</div>
 		<div class="home menu hidden"></div>
 		<div class="hold menu hidden"></div>
-		<script>
-const checkDigits = (digits) => (digits < 10) ? '0' + digits : '' + digits;
-function setTime() {
-    const DATE = new Date();
-    const MINUTE = checkDigits(DATE.getMinutes());
-    const ananas = (DATE.getHours() >= 12) ? 'pm' : 'am';
-    let hour = DATE.getHours();
-    if (hour > 12)
-        hour -= 12;
-    else if (hour == 0)
-        hour += 12;
-    else
-        hour = hour;
-    document.querySelector('.status__time').innerHTML = `${checkDigits(hour)}:${MINUTE}${ananas}`;
-}
-function setBattery() {
-    navigator.getBattery()
-        .then((battery) => {
-        document.querySelector('.status__battery').innerHTML = Math.ceil(battery.level * 100) + '%';
-        if (battery.charging == true && battery.level < 1)
-            document.querySelector('.status__battery').style.color = '#00e17c';
-        else if (battery.level <= 0.2)
-            document.querySelector('.status__battery').style.color = 'red';
-        else
-            document.querySelector('.status__battery').style.color = '';
-    });
-}
-function refreshStatus() {
-    setTime();
-    setBattery();
-}
-refreshStatus();
-setInterval(refreshStatus, (1 * 1000));
-document.querySelector('.lockscreen__home').addEventListener('click', () => document.querySelector('.lockscreen').classList.toggle('init'));
-		</script>
-	</div>>
+	</div>
+	<script>
+		const checkDigits = (digits) => (digits < 10) ? '0' + digits : '' + digits;
+		function setTime() {
+			const DATE = new Date();
+			const MINUTE = checkDigits(DATE.getMinutes());
+			const ananas = (DATE.getHours() >= 12) ? 'pm' : 'am';
+			let hour = DATE.getHours();
+			if (hour > 12)
+				hour -= 12;
+			else if (hour == 0)
+				hour += 12;
+			else
+				hour = hour;
+			document.querySelector('.status__time').innerHTML = `${checkDigits(hour)}:${MINUTE}${ananas}`;
+		}
+		function setBattery() {
+			navigator.getBattery()
+				.then((battery) => {
+				document.querySelector('.status__battery').innerHTML = Math.ceil(battery.level * 100) + '%';
+				if (battery.charging == true && battery.level < 1)
+					document.querySelector('.status__battery').style.color = '#00e17c';
+				else if (battery.level <= 0.2)
+					document.querySelector('.status__battery').style.color = 'red';
+				else
+					document.querySelector('.status__battery').style.color = '';
+			});
+		}
+		function refreshStatus() {
+			setTime();
+			setBattery();
+		}
+		refreshStatus();
+		setInterval(refreshStatus, (1 * 1000));
+		document.querySelector('.lockscreen__home').addEventListener('click', () => document.querySelector('.lockscreen').classList.toggle('init'));
+				</script>
 </body>
 </html>
