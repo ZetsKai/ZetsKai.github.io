@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<style>
-		@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap");
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!-- <script type="module" src="index.js" defer></script> -->
+  <style>
+	@import url("//fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -29,89 +31,133 @@ button {
 
 .foreground {
   background-color: #232323;
-}
-
-.inner {
-  z-index: -1;
-  visibility: hidden;
 } /* .lockscreen */
 .unlock {
   position: relative;
   flex-direction: column;
   flex-basis: 100%;
   flex-grow: 1;
-  justify-content: center;
+  justify-items: center;
   align-items: center;
 }
 .unlock__top {
   justify-content: flex-end;
   align-items: flex-end;
-  width: 100%;
+  align-self: stretch;
   height: 11%;
   padding: 0 6vw;
 }
-.unlock__bottom {
-  justify-content: center;
-  align-items: center;
-  margin-top: auto;
-  margin-bottom: 4.5vw;
-}
-.unlock button {
-  margin-top: auto;
+.unlock__home {
+  box-sizing: content-box;
+  padding: 10px;
+  border-radius: 100px;
   width: 13vw;
   height: 13vw;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.lockscreen__text--unlock {
+  background-color: #ebebeb;
+}
+
+.unlock__home:active, .lockscreen__text--unlock:active, .lockscreen__back:active {
+  background-color: rgb(211, 237, 240);
+}
+
+.inner-news {
+  flex-basis: 30vw;
+  background-color: lime;
+  flex-shrink: 0;
+  transition: flex-basis 100ms linear;
 }
 
 .news {
   position: absolute;
+  left: 0vw;
+  align-items: center;
   width: 30vw;
-  max-width: 30vw;
-  justify-content: center;
-  padding: 4.5% 0;
+  padding-top: 4.5%;
   color: white;
-  left: 0;
-  transition: left 100ms linear;
+  z-index: 2;
+  transition: left 100ms linear, width 100ms linear;
 }
-.news__container {
+.news, .news__cards {
   flex-direction: column;
-  /* background-color: blue; */
-  height: 100%;
 }
 .news__cards, .news__card {
   flex-basis: 100%;
   flex-grow: 1;
 }
 .news__cards {
-  flex-direction: column;
-  gap: 0.6vw;
   margin-bottom: 2.2vw;
+  gap: 2%;
 }
 .news__card {
+  position: relative;
+  width: 23vw;
   background-color: #555;
+  top: 0%;
+  left: 0vw;
+  transition: left 140ms linear, top 140ms ease-in;
 }
-.news__text {
+.news .lockscreen__text--news {
   flex-shrink: 0;
-  margin-bottom: 0vw;
-  align-items: center;
   margin-top: auto;
 }
-
-.inner--news {
-  flex-basis: 30vw;
-  transition: flex-basis 100ms linear;
-  flex-shrink: 0;
+.news .lockscreen__text--news:active {
+  background-color: #111;
 }
-
-.init .news {
+.news--start-unlock .lockscreen__text, .news--start-news .lockscreen__text {
+  z-index: -10;
+  opacity: 0;
+}
+.news--start-unlock .lockscreen__three, .news--start-news .lockscreen__three {
+  opacity: 1;
+}
+:is(.news--start-unlock, .news--start-news) ~ .lockscreen__back {
+  z-index: 3;
+  opacity: 1;
+}
+:is(.news--start-unlock, .news--start-news) ~ .unlock .lockscreen__text--unlock {
+  opacity: 0;
+}
+:is(.news--start-unlock, .news--start-news) ~ .unlock .unlock__top {
+  opacity: 0;
+}
+.news--start-unlock {
   left: -30vw;
 }
-
-.init .inner--news {
+.news--start-unlock ~ .inner-news {
   flex-basis: 0vw;
+}
+.news--start-news {
+  width: 100vw;
+}
+.news--start-news .news__card:nth-child(1) {
+  top: 34%;
+  left: -24vw;
+}
+.news--start-news .news__card:nth-child(3) {
+  top: -34%;
+  left: 24vw;
+}
+
+.lockscreen {
+  position: relative;
+  overflow: hidden;
+}
+
+.lockscreen__text, .lockscreen__back {
+  padding: 2vw;
+  border-radius: 10px;
+  opacity: 1;
 }
 
 .lockscreen__text {
-  opacity: 1;
+  z-index: 1;
+  align-items: center;
+  margin-bottom: 2.5vw;
   transition: opacity 100ms linear;
 }
 .lockscreen__text p {
@@ -119,7 +165,7 @@ button {
   white-space: nowrap;
 }
 
-.init .lockscreen__text {
+.start-news .lockscreen__text, .start-home .lockscreen__text {
   opacity: 0;
 }
 
@@ -130,38 +176,67 @@ button {
   margin-right: 1vw;
 }
 
-.unlock .lockscreen__text {
-  background-color: #ebebeb;
+.lockscreen__three, .lockscreen__back {
+  transition: opacity 100ms 1ms linear;
 }
 
-.three {
-  z-index: -10;
+.lockscreen__three {
   position: absolute;
+  z-index: -1;
   opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 4vw;
-  transition: opacity 100ms 1ms linear;
   text-align: center;
 }
-.three p:first-child {
+.lockscreen__three p:first-child {
   font-size: 2.6vw;
 }
-.three p {
+
+.lockscreen__back {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  bottom: 1vw;
+  color: orangered;
   font-size: 2vw;
 }
 
-.init .three {
-  z-index: 10;
+.lockscreen__three span {
+  display: inline-block;
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100px;
+  border-width: 1px;
+  border-style: solid;
+}
+.lockscreen__three span:not(:last-of-type) {
+  margin-right: 1vw;
+}
+
+:is(.news--start-unlock, .news--start-news) ~ .lockscreen__three {
+  z-index: 4;
   opacity: 1;
 }
 
-.lockscreen__home {
-  box-sizing: content-box;
-  padding: 10px;
-  border-radius: 100px;
+.news--start-news ~ .lockscreen__three {
+  color: #ebebeb;
+}
+.news--start-news ~ .lockscreen__three span {
+  border-color: #ebebeb;
+}
+.news--start-news ~ .lockscreen__three span.click {
+  background-color: #ebebeb;
 }
 
-.lockscreen__home:active {
-  background-color: rgb(211, 237, 240);
+.news--start-unlock ~ .lockscreen__three {
+  color: #232323;
+}
+.news--start-unlock ~ .lockscreen__three span {
+  border-color: #232323;
+}
+.news--start-unlock ~ .lockscreen__three span.click {
+  background-color: #232323;
 }
 
 .hold {
@@ -262,7 +337,7 @@ img:last-child {
     opacity: 1;
   }
 }
-	</style>
+  </style>
 </head>
 <body>
 	<div id="screen">
@@ -271,23 +346,21 @@ img:last-child {
 			<img src="https://vgboxart.com/resources/logo/14116_nintendo-switch-prev.png" alt="" srcset="">
 		</div>
 		<div class="lockscreen menu flex">
-			<div class="inner inner--news"></div>
-			<div class="news menu flex foreground">
-        		<div class="news__container flex">
-          			<nav class="news__cards flex">
-          				<div class="news__card"></div>
-          				<div class="news__card"></div>
-          				<div class="news__card"></div>
-          			</nav>
-          			<div class="lockscreen__text lockscreen__text--news news__text flex">
-          				<svg class="control-btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          					<circle cx="20" cy="20" r="20" fill="white"/>
-          					<path d="M9.82714 9.34844H14.2909L19.6283 19.0004H19.8413L25.1787 9.34844H29.6425L21.7057 23.0274V31.1666H17.7639V23.0274L9.82714 9.34844Z" fill="#232323"/>
-          				</svg>
-          				<p>Featured News</p>
-          			</div>
-			 	</div>
+			<div class="news menu foreground flex">
+				<nav class="news__cards flex lockscreen__btn">
+					<div class="news__card"></div>
+					<div class="news__card"></div>
+					<div class="news__card"></div>
+				</nav>
+				<div class="lockscreen__text lockscreen__text--news lockscreen__btn flex">
+					<svg class="control-btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="20" cy="20" r="20" fill="white"/>
+						<path d="M9.82714 9.34844H14.2909L19.6283 19.0004H19.8413L25.1787 9.34844H29.6425L21.7057 23.0274V31.1666H17.7639V23.0274L9.82714 9.34844Z" fill="#232323"/>
+					</svg>
+					<p>Featured News</p>
+				</div>
 			</div>
+			<div class="inner-news"></div>
 			<div class="unlock flex">
 				<div class="unlock__top flex">
 					<div class="status flex">
@@ -296,31 +369,85 @@ img:last-child {
 						<div class="status__battery">🔌</div>
 					</div>
 				</div>
-				<button class="lockscreen__home">
+				<button class="unlock__home lockscreen__btn">
 					<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M160 80C160 124.183 124.183 160 80 160C35.8172 160 0 124.183 0 80C0 35.8172 35.8172 0 80 0C124.183 0 160 35.8172 160 80ZM8.00014 80C8.00014 119.764 40.2356 152 80 152C119.764 152 152 119.764 152 80C152 40.2356 119.764 8.00014 80 8.00014C40.2356 8.00014 8.00014 40.2356 8.00014 80Z" fill="#232323"/>
 						<path d="M78.7321 38.6861C79.4694 38.0819 80.5306 38.0819 81.2678 38.6861L121.317 71.5119C122.77 72.7028 121.928 75.0587 120.049 75.0587H39.9505C38.0718 75.0587 37.2296 72.7028 38.6826 71.5119L78.7321 38.6861Z" fill="#232323"/>
 						<path fill-rule="evenodd" clip-rule="evenodd" d="M66.8236 74.2856H49.8824V113.882H66.8236H93.1766H110.118V74.2856H93.1766H66.8236ZM66.8236 97.8823V77.1764H93.1766V97.8823H66.8236Z" fill="#232323"/>
 					</svg>
 				</button>
-				<div class="lockscreen__text lockscreen__text--unlock unlock__bottom flex">
+				<div class="lockscreen__text lockscreen__text--unlock flex lockscreen__btn">
 					<svg class="control-btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<circle cx="20" cy="20" r="20" fill="#232323"/>
 						<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
 					</svg>
 					<p>Continue</p>
 				</div>
-				<div class="three">
-					<p>Press the same button three times</p>
-					<p>○　○　○</p>
-				</div>
+			</div>
+			<div class="lockscreen__back">(B) Back</div>
+			<div class="lockscreen__three lockscreen__btn">
+				<p>Press the same button three times</p>
+				<p>
+					<span></span>
+					<span></span>
+					<span></span>
+				</p>
 			</div>
 		</div>
 		<div class="home menu hidden"></div>
 		<div class="hold menu hidden"></div>
 	</div>
+
 	<script>
-		const checkDigits = (digits) => (digits < 10) ? '0' + digits : '' + digits;
+		const btn = document.querySelectorAll('.lockscreen__btn');
+let previousClick = null;
+let clickCounter = 0;
+function open(btnE) {
+    const PARENT = btnE.currentTarget.parentElement.classList[0];
+    document.querySelector('.news').classList.add(`news--start-${PARENT}`);
+    btn.forEach(btn => btn.removeEventListener('click', open));
+    setBtns(three);
+}
+function setBtns(func) {
+    btn.forEach(btn => btn.addEventListener('click', func));
+}
+function three(e) {
+    const currentClick = e.currentTarget;
+    if (previousClick == null)
+        previousClick = currentClick;
+    if (currentClick !== previousClick)
+        return reset();
+    clickCounter++;
+    document.querySelectorAll('.lockscreen__three span')[clickCounter - 1].classList.add('click');
+    if (clickCounter === 3)
+        return close();
+}
+function close() {
+    document.querySelector('.news').classList.remove('news--start-unlock', 'news--start-news');
+    reset();
+    btn.forEach(btn => btn.removeEventListener('click', three));
+    setBtns(open);
+}
+function reset() {
+    previousClick = null;
+    clickCounter = 0;
+    document.querySelectorAll('.lockscreen__three span').forEach(dot => dot.classList.remove('click'));
+}
+document.querySelector('.lockscreen__back').addEventListener('click', close);
+btn.forEach(btn => btn.addEventListener('click', open));
+function setBattery() {
+    navigator.getBattery()
+        .then((battery) => {
+        document.querySelector('.status__battery').innerHTML = Math.ceil(battery.level * 100) + '%';
+        if (battery.charging == true && battery.level < 1)
+            document.querySelector('.status__battery').style.color = '#00e17c';
+        else if (battery.level <= 0.2)
+            document.querySelector('.status__battery').style.color = 'red';
+        else
+            document.querySelector('.status__battery').style.color = '';
+    });
+}
+const checkDigits = (digits) => (digits < 10) ? '0' + digits : '' + digits;
 function setTime() {
     const DATE = new Date();
     const MINUTE = checkDigits(DATE.getMinutes());
@@ -334,25 +461,12 @@ function setTime() {
         hour = hour;
     document.querySelector('.status__time').innerHTML = `${checkDigits(hour)}:${MINUTE}${ananas}`;
 }
-function setBattery() {
-    navigator.getBattery()
-        .then((battery) => {
-        document.querySelector('.status__battery').innerHTML = Math.ceil(battery.level * 100) + '%';
-        if (battery.charging == true && battery.level < 1)
-            document.querySelector('.status__battery').style.color = '#00e17c';
-        else if (battery.level <= 0.2)
-            document.querySelector('.status__battery').style.color = 'red';
-        else
-            document.querySelector('.status__battery').style.color = '';
-    });
-}
 function refreshStatus() {
     setTime();
     setBattery();
 }
 refreshStatus();
 setInterval(refreshStatus, (1 * 1000));
-document.querySelector('.lockscreen__home').addEventListener('click', () => document.querySelector('.lockscreen').classList.toggle('init'));
 	</script>
 </body>
 </html>
