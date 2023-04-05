@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-  <!-- <link rel="stylesheet" href="style.css"> -->
-  <!-- <script type="module" src="index.js" defer></script> -->
-  <style>
-	@import url("//fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap");
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -31,38 +29,305 @@ button {
 
 .foreground {
   background-color: #232323;
-} /* .lockscreen */
-.unlock {
-  position: relative;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex-grow: 1;
-  justify-items: center;
-  align-items: center;
-}
-.unlock__top {
-  justify-content: flex-end;
-  align-items: flex-end;
-  align-self: stretch;
-  height: 11%;
-  padding: 0 6vw;
-}
-.unlock__home {
-  box-sizing: content-box;
-  padding: 10px;
-  border-radius: 100px;
-  width: 13vw;
-  height: 13vw;
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
-.lockscreen__text--unlock {
+.selected {
+  border: 1px solid #83b8ff;
+}
+
+.bottombar {
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  flex-basis: 5.6vw;
+  margin: 0 2vw;
+  padding: 0 2vw;
+  border-top: 1px solid black;
+  z-index: 99;
+}
+
+.btn-text--news {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+.btn-text--news:active {
+  background-color: #111;
+}
+
+.btn-text--unlock {
+  background-color: #ebebeb;
+}
+.btn-text--unlock:active {
+  background-color: rgb(211, 237, 240);
+}
+
+.btn-text {
+  z-index: 1;
+  align-items: center;
+  margin-bottom: 2.5vw;
+  transition: opacity 100ms linear;
+  padding: 2vw;
+  border-radius: 10px;
+  opacity: 1;
+}
+.btn-text__btn {
+  flex-shrink: 0;
+  width: 3.4vw;
+  height: 3.4vw;
+  margin-right: 1vw;
+}
+.btn-text__text {
+  font-size: 2.6vw;
+  white-space: nowrap;
+}
+
+.option-btns .btn-text {
+  padding: 0;
+  margin-bottom: 0;
+}
+.option-btns .btn-text__btn {
+  width: 2vw;
+  height: 2vw;
+  margin-right: 0.6vw;
+}
+.option-btns .btn-text__text {
+  font-size: 1.8vw;
+}
+.option-btns .btn-text:not(:last-of-type) {
+  margin-right: 2vw;
+}
+
+.menu-item {
+  padding: 1vw;
+  font-size: 1.8vw;
+}
+.menu-item:hover {
+  background-color: hsla(186, 60%, 80%, 0.4);
+}
+
+.menu-item-info {
+  font-size: 1.2vw;
+  padding: 0.4vw 1vw;
+  color: gray;
+  border-top: 2px solid hsl(0, 0%, 84%);
+}
+.menu-item-info:not(:last-child) {
+  margin-bottom: 1vw;
+}
+.menu-item-info__list::before {
+  display: inline-block;
+  margin-right: 1%;
+  width: 0.7vw;
+  height: 0.7vw;
+  background-color: #666;
+  transform: rotate(45deg);
+  content: "";
+}
+.menu-item-info__list::after {
+  display: block;
+  content: "";
+}
+.menu-item-info--pos-right {
+  text-align: right;
+}
+
+.news-cards--y-btn .news-cards__card:nth-child(1) {
+  top: 34%;
+  left: -24vw;
+}
+.news-cards--y-btn .news-cards__card:nth-child(3) {
+  top: -34%;
+  left: 24vw;
+}
+
+.news--news .news__card:nth-child(1) {
+  top: 34%;
+  left: -24vw;
+}
+.news--news .news__card:nth-child(3) {
+  top: -34%;
+  left: 24vw;
+}
+
+.news-cards {
+  flex-direction: column;
+  margin-bottom: 2.2vw;
+  gap: 2%;
+}
+.news-cards, .news-cards__card {
+  flex-basis: 100%;
+  flex-grow: 1;
+}
+.news-cards__card {
+  position: relative;
+  width: 23vw;
+  background-color: #555;
+  top: 0%;
+  left: 0vw;
+  transition: left 140ms linear, top 140ms ease-in;
+}
+
+.status {
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-top: 4vw;
+  padding-right: 5vw;
+  font-size: 2vw;
+}
+.status__wifi {
+  margin-right: 1vw;
+}
+.status__time {
+  margin-right: 1vw;
+}
+
+.news--start-unlock ~ .unlock .status {
+  visibility: hidden;
+}
+
+.three-press {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 4vw;
+  text-align: center;
+  transition: opacity 100ms 1ms linear;
+}
+.three-press__text {
+  font-size: 2.6vw;
+}
+.three-press__dot {
+  display: inline-block;
+  width: 1vw;
+  height: 1vw;
+  border-radius: 100px;
+  border-width: 1px;
+  border-style: solid;
+}
+.three-press__dot--clicked {
+  background-color: red;
+}
+.three-press__dot:not(:last-of-type) {
+  margin-right: 1vw;
+}
+
+.hold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  flex-direction: column;
+  width: 36vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8666666667);
+  color: white;
+  z-index: 30;
+}
+.hold__utilities {
+  margin-top: auto;
+  padding: 0 2vw;
+}
+.hold__utilities > p {
+  color: gray;
+}
+.hold__utility, .hold__utilities > p {
+  padding: 1vw 10px;
+}
+.hold__utility {
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  font-size: 2vw;
+}
+.hold__utility:first-of-type {
+  border-top: 1px solid gray;
+}
+.hold__utility--bar {
+  padding-top: 2vw;
+  padding-bottom: 2vw;
+}
+.hold p {
+  font-size: 1.4vw;
+}
+.hold__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5.6vw;
+  border-top: 1px solid white;
+  margin: 0 1vw;
+}
+
+.bornana {
+  width: 100px;
+}
+.bornana--plato {
+  color: hotpink;
+}
+
+.news--news {
+  width: 100vw !important;
+}
+
+.news--unlock {
+  left: -30vw !important;
+}
+
+.news--unlock ~ .inner-news {
+  flex-basis: 0vw;
+}
+
+:is(.news--unlock, .news--news) .btn-text {
+  z-index: -10;
+  opacity: 0;
+}
+:is(.news--unlock, .news--news) ~ :is(.lockscreen__back, .three-press) {
+  opacity: 1;
+}
+:is(.news--unlock, .news--news) ~ .lockscreen__back {
+  z-index: 3;
+}
+:is(.news--unlock, .news--news) ~ .unlock :is(.btn-text--unlock, .unlock__top) {
+  opacity: 0;
+}
+:is(.news--unlock, .news--news) ~ .three-press {
+  z-index: 4;
+}
+
+.news--news ~ .three-press {
+  color: #ebebeb;
+}
+.news--news ~ .three-press span {
+  border-color: #ebebeb;
+}
+.news--news ~ .three-press span.click {
   background-color: #ebebeb;
 }
 
-.unlock__home:active, .lockscreen__text--unlock:active, .lockscreen__back:active {
-  background-color: rgb(211, 237, 240);
+.news--unlock ~ .three-press {
+  color: #232323;
+}
+.news--unlock ~ .three-press span {
+  border-color: #232323;
+}
+.news--unlock ~ .three-press span.click {
+  background-color: #232323;
+}
+
+.news {
+  position: absolute;
+  flex-direction: column;
+  left: 0vw;
+  align-items: center;
+  width: 30vw;
+  height: 100%;
+  padding-top: 4.5%;
+  color: white;
+  z-index: 2;
+  transition: left 100ms linear, width 100ms linear;
+  /* &--start-unlock ~ .inner-news { flex-basis: 0vw; } */
 }
 
 .inner-news {
@@ -72,75 +337,99 @@ button {
   transition: flex-basis 100ms linear;
 }
 
-.news {
-  position: absolute;
-  left: 0vw;
+.unlock {
+  position: relative;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex-grow: 1;
+  justify-items: center;
   align-items: center;
-  width: 30vw;
-  padding-top: 4.5%;
-  color: white;
-  z-index: 2;
-  transition: left 100ms linear, width 100ms linear;
 }
-.news, .news__cards {
+.unlock .status {
+  align-self: flex-end;
+}
+.unlock__btn {
+  box-sizing: content-box;
+  padding: 10px;
+  border-radius: 100px;
+  width: 13vw;
+  height: 13vw;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.unlock__btn:active, .lockscreen__back:active {
+  background-color: rgb(211, 237, 240);
+}
+
+.js-home-item:hover {
+  outline: 6px solid rgb(0, 166, 255);
+}
+
+.home, .home__container {
   flex-direction: column;
 }
-.news__cards, .news__card {
+.home__container {
+  position: relative;
   flex-basis: 100%;
   flex-grow: 1;
 }
-.news__cards {
-  margin-bottom: 2.2vw;
-  gap: 2%;
-}
-.news__card {
-  position: relative;
-  width: 23vw;
-  background-color: #555;
-  top: 0%;
-  left: 0vw;
-  transition: left 140ms linear, top 140ms ease-in;
-}
-.news .lockscreen__text--news {
+.home .topbar {
+  justify-content: space-between;
   flex-shrink: 0;
-  margin-top: auto;
 }
-.news .lockscreen__text--news:active {
-  background-color: #111;
+.home .topbar__users {
+  display: flex;
+  padding-left: 5vw;
+  align-items: flex-end;
+  height: 6vw;
 }
-.news--start-unlock .lockscreen__text, .news--start-news .lockscreen__text {
-  z-index: -10;
-  opacity: 0;
+.home .topbar__user {
+  padding-top: 4vw;
+  width: 4vw;
+  height: 4vw;
+  background-color: #777;
+  border-radius: 100px;
 }
-.news--start-unlock .lockscreen__three, .news--start-news .lockscreen__three {
-  opacity: 1;
+.home .topbar .status {
+  align-self: flex-start;
 }
-:is(.news--start-unlock, .news--start-news) ~ .lockscreen__back {
-  z-index: 3;
-  opacity: 1;
+.home__games {
+  padding-left: 8vw;
+  flex-grow: 1;
+  overflow-x: scroll;
 }
-:is(.news--start-unlock, .news--start-news) ~ .unlock .lockscreen__text--unlock {
-  opacity: 0;
+.home__games::-webkit-scrollbar {
+  display: none;
 }
-:is(.news--start-unlock, .news--start-news) ~ .unlock .unlock__top {
-  opacity: 0;
+.home__game {
+  position: relative;
+  background-color: #ddd;
+  flex-shrink: 0;
+  flex-basis: 20vw;
+  /* box-shadow: 0 0 2px #222; */
 }
-.news--start-unlock {
-  left: -30vw;
+.home__game:not(:last-of-type) {
+  margin-right: 1vw;
 }
-.news--start-unlock ~ .inner-news {
-  flex-basis: 0vw;
+.home .topbar, .home__buttons {
+  flex-basis: 15vw;
 }
-.news--start-news {
-  width: 100vw;
+.home__buttons {
+  justify-content: center;
+  align-items: center;
 }
-.news--start-news .news__card:nth-child(1) {
-  top: 34%;
-  left: -24vw;
+.home__button {
+  width: 7vw;
+  height: 7vw;
+  background-color: white;
+  border-radius: 100px;
 }
-.news--start-news .news__card:nth-child(3) {
-  top: -34%;
-  left: 24vw;
+.home__button:not(:last-of-type) {
+  margin-right: 2vw;
+}
+.home__button--nso {
+  background-color: #f11;
 }
 
 .lockscreen {
@@ -148,24 +437,13 @@ button {
   overflow: hidden;
 }
 
-.lockscreen__text, .lockscreen__back {
+.lockscreen__back {
   padding: 2vw;
   border-radius: 10px;
   opacity: 1;
 }
 
-.lockscreen__text {
-  z-index: 1;
-  align-items: center;
-  margin-bottom: 2.5vw;
-  transition: opacity 100ms linear;
-}
-.lockscreen__text p {
-  font-size: 2.6vw;
-  white-space: nowrap;
-}
-
-.start-news .lockscreen__text, .start-home .lockscreen__text {
+.start-news .btn-text, .start-home .btn-text {
   opacity: 0;
 }
 
@@ -176,23 +454,6 @@ button {
   margin-right: 1vw;
 }
 
-.lockscreen__three, .lockscreen__back {
-  transition: opacity 100ms 1ms linear;
-}
-
-.lockscreen__three {
-  position: absolute;
-  z-index: -1;
-  opacity: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 4vw;
-  text-align: center;
-}
-.lockscreen__three p:first-child {
-  font-size: 2.6vw;
-}
-
 .lockscreen__back {
   position: absolute;
   z-index: -1;
@@ -200,80 +461,150 @@ button {
   bottom: 1vw;
   color: orangered;
   font-size: 2vw;
+  transition: opacity 100ms 1ms linear;
+} /* :is(.news--start-unlock, .news--start-news) ~ .three-press {
+	z-index: 4;
+	opacity: 1;
 }
 
-.lockscreen__three span {
-  display: inline-block;
-  width: 1vw;
-  height: 1vw;
-  border-radius: 100px;
-  border-width: 1px;
-  border-style: solid;
-}
-.lockscreen__three span:not(:last-of-type) {
-  margin-right: 1vw;
+.news--start-news ~ .three-press {
+	color: #ebebeb;
+
+	span {
+		border-color: #ebebeb;
+
+		&.click { background-color: #ebebeb; }
+	}
 }
 
-:is(.news--start-unlock, .news--start-news) ~ .lockscreen__three {
-  z-index: 4;
-  opacity: 1;
+.news--start-unlock ~ .three-press {
+	color: #232323;
+
+	span {
+		border-color: #232323;
+
+		&.click { background-color: #232323; }
+	}
+} */
+.sidebar-content {
+  flex-direction: column;
+}
+.sidebar-content__header {
+  flex-shrink: 0;
+  align-items: center;
+  margin: 0 2vw;
+  padding-left: 2vw;
+  height: 7vw;
+  font-size: 2vw;
+  border-bottom: 1px solid black;
+  z-index: 2;
+}
+.sidebar-content__container {
+  flex-grow: 1;
+  flex-basis: 100%;
+  min-height: 0;
+}
+.sidebar-content .sidebar, .sidebar-content .contents__page {
+  overflow-y: scroll;
+}
+.sidebar-content .bottombar {
+  flex-shrink: 0;
 }
 
-.news--start-news ~ .lockscreen__three {
-  color: #ebebeb;
+.sidebar {
+  flex-basis: 32vw;
+  flex-shrink: 0;
+  padding: 1vw;
+  padding-left: 6vw;
+  padding-right: 2vw;
+  background-color: #f3f3f3;
+  box-shadow: 0 0 4px #f3f3f3;
 }
-.news--start-news ~ .lockscreen__three span {
-  border-color: #ebebeb;
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
-.news--start-news ~ .lockscreen__three span.click {
-  background-color: #ebebeb;
+.sidebar__menu-list {
+  padding: 2vw 0vw;
+}
+.sidebar__menu-list:not(:last-child) {
+  border-bottom: 2px solid hsl(0, 0%, 84%);
+}
+.sidebar__menu-item--selected {
+  /* background-color: white; */
+  /* outline: 6px solid cyan; */
+  border-left: 0.4vw solid blue;
+  color: blue;
 }
 
-.news--start-unlock ~ .lockscreen__three {
-  color: #232323;
+.contents {
+  flex-basis: 100%;
+  flex-grow: 1;
+  font-size: 1vw;
+  min-height: 0;
+  /*
+  	This is basically saying: Select the element that has a .contents__menu-item class and it's the last one of its kind (html element).
+  */
 }
-.news--start-unlock ~ .lockscreen__three span {
-  border-color: #232323;
+.contents__item:not(:last-child) {
+  margin-bottom: 1vw !important;
 }
-.news--start-unlock ~ .lockscreen__three span.click {
-  background-color: #232323;
+.contents__page {
+  flex-direction: column;
+  padding: 3vw 4vw;
+  height: 100%;
+  overflow-y: scroll;
 }
-
-.hold {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 36%;
-  background-color: rgba(0, 0, 0, 0.8666666667);
+.contents__menu-list:not(:last-child) {
+  margin-bottom: 3vw;
+}
+.contents__menu-header {
+  margin-bottom: 1vw;
+  padding-left: 0.4vw;
+  border-left: 0.4vw solid gray;
+  font-size: 1.2vw;
+  color: #111;
+}
+.contents__menu-item {
+  border-top: 2px solid hsl(0, 0%, 84%);
+}
+.contents__menu-item:last-child {
+  border-bottom: 2px solid hsl(0, 0%, 84%);
+}
+.contents .white {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  padding: 1vw;
+  height: 20vw;
+  background-color: #f3f3f3;
+}
+.contents .fornow {
+  font-size: 1.6vw;
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+.contents .error-info__error {
+  color: gray;
+}
+.contents .error-info__error:not(:last-child) {
+  padding-bottom: 10px;
 }
 
 .menu {
+  position: relative;
+  width: 100%;
   height: 100%;
 }
 
-.status__time {
-  font-size: 2vw;
-  margin-right: 1vw;
-}
-
-.status {
-  align-items: flex-end;
-  font-size: 2vw;
-}
-.status__wifi {
-  margin-right: 1vw;
-}
-
-.init .status {
-  display: none;
-} /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap'); */
 html, body {
   width: 100vw;
   height: 100vh;
-  background-color: #000;
 }
 
 html {
+  background-color: #000;
   font-family: "Open Sans";
   color: #232323;
 }
@@ -281,8 +612,7 @@ html {
 #screen {
   position: relative;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   width: 100%;
   max-height: 100%;
   aspect-ratio: 16/9;
@@ -337,7 +667,44 @@ img:last-child {
     opacity: 1;
   }
 }
-  </style>
+.transition {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ebebeb;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 40;
+}
+
+.transition.play {
+  animation: trans 250ms ease-in-out alternate forwards 2;
+}
+
+.pata {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: blue;
+  z-index: 99;
+  right: 0;
+  bottom: 0;
+}
+
+h1 {
+  font-size: 100px;
+  text-align: center;
+}
+
+@keyframes trans {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+	</style>
 </head>
 <body>
 	<div id="screen">
@@ -345,110 +712,788 @@ img:last-child {
 			<img src="https://www.retrostudios.com/wp-content/themes/wlion/public/img/nintendo-logo.png" alt="" srcset="">
 			<img src="https://vgboxart.com/resources/logo/14116_nintendo-switch-prev.png" alt="" srcset="">
 		</div>
-		<div class="lockscreen menu flex">
-			<div class="news menu foreground flex">
-				<nav class="news__cards flex lockscreen__btn">
-					<div class="news__card"></div>
-					<div class="news__card"></div>
-					<div class="news__card"></div>
+		<div class="transition"></div>
+		<div class="hold flex hidden">
+			<div class="status flex">
+				<div class="status__time"></div>
+				<div class="status__wifi">三</div>
+				<div class="status__battery">🔌</div>
+			</div>
+			<div class="hold__utilities">
+				<div class="hold__utility">Sleep Mode</div>
+				<div class="hold__utility">Auto Brightness</div>
+				<div class="hold__utility hold__utility--bar">B ========================</div>
+				<div class="hold__utility hold__utility--bar">V ========================</div>
+				<div class="hold__utility">Airplane Mode</div>
+				<p>If you turn Airplane Mode on, you will no longer be able to use wireless controllers.</p>
+			</div>
+			<nav class="bottombar flex">
+				<p>[----]</p>
+				<div class="option-btns flex">
+					<div class="option-btns__c flex hidden" data-js-btn="album">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Filter</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Delete</p>
+						</div>
+					</div>
+					<div class="option-btns__c flex hidden" data-js-btn="games">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Options</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Start</p>
+						</div>
+					</div>
+					<div class="btn-text btn-text flex js-ls-btn hidden" data-gamepad-btn="a" data-js-btn="friends">
+						<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="20" cy="20" r="20" fill="white"/>
+							<path d="M9.82714 9.34844H14.2909L19.6283 19.0004H19.8413L25.1787 9.34844H29.6425L21.7057 23.0274V31.1666H17.7639V23.0274L9.82714 9.34844Z" fill="#232323"/>
+						</svg>
+						<p class="btn-text__text">Update</p>
+					</div>
+					<div class="btn-text btn-text flex js-ls-btn hidden" data-gamepad-btn="a" data-open="unlock">
+						<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="20" cy="20" r="20" fill="#232323"/>
+							<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+						</svg>
+						<p class="btn-text__text">Close</p>
+					</div>
+					<div class="option-btns__c flex" data-js-btn="general">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Back</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">OK</p>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div id="lockscreen" class="lockscreen menu flex">
+			<div class="news foreground flex">
+				<nav class="news-cards flex js-ls-btn" data-open="news">
+					<div class="news-cards__card"></div>
+					<div class="news-cards__card"></div>
+					<div class="news-cards__card"></div>
 				</nav>
-				<div class="lockscreen__text lockscreen__text--news lockscreen__btn flex">
-					<svg class="control-btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<div class="btn-text btn-text--news js-ls-btn flex" data-gamepad-btn="y" data-open="news">
+					<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<circle cx="20" cy="20" r="20" fill="white"/>
 						<path d="M9.82714 9.34844H14.2909L19.6283 19.0004H19.8413L25.1787 9.34844H29.6425L21.7057 23.0274V31.1666H17.7639V23.0274L9.82714 9.34844Z" fill="#232323"/>
 					</svg>
-					<p>Featured News</p>
+					<p class="btn-text__text">Featured News</p>
 				</div>
 			</div>
 			<div class="inner-news"></div>
 			<div class="unlock flex">
-				<div class="unlock__top flex">
-					<div class="status flex">
-						<div class="status__time"></div>
-						<div class="status__wifi">三</div>
-						<div class="status__battery">🔌</div>
-					</div>
+				<div class="status flex">
+					<div class="status__time"></div>
+					<div class="status__wifi">三</div>
+					<div class="status__battery">🔌</div>
 				</div>
-				<button class="unlock__home lockscreen__btn">
+				<button class="unlock__btn js-ls-btn" data-gamepad-btn="h" data-open="unlock">
 					<svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M160 80C160 124.183 124.183 160 80 160C35.8172 160 0 124.183 0 80C0 35.8172 35.8172 0 80 0C124.183 0 160 35.8172 160 80ZM8.00014 80C8.00014 119.764 40.2356 152 80 152C119.764 152 152 119.764 152 80C152 40.2356 119.764 8.00014 80 8.00014C40.2356 8.00014 8.00014 40.2356 8.00014 80Z" fill="#232323"/>
 						<path d="M78.7321 38.6861C79.4694 38.0819 80.5306 38.0819 81.2678 38.6861L121.317 71.5119C122.77 72.7028 121.928 75.0587 120.049 75.0587H39.9505C38.0718 75.0587 37.2296 72.7028 38.6826 71.5119L78.7321 38.6861Z" fill="#232323"/>
 						<path fill-rule="evenodd" clip-rule="evenodd" d="M66.8236 74.2856H49.8824V113.882H66.8236H93.1766H110.118V74.2856H93.1766H66.8236ZM66.8236 97.8823V77.1764H93.1766V97.8823H66.8236Z" fill="#232323"/>
 					</svg>
 				</button>
-				<div class="lockscreen__text lockscreen__text--unlock flex lockscreen__btn">
-					<svg class="control-btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<div class="btn-text btn-text--unlock flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+					<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<circle cx="20" cy="20" r="20" fill="#232323"/>
 						<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
 					</svg>
-					<p>Continue</p>
+					<p class="btn-text__text">Continue</p>
 				</div>
+				<div class="js-ls-btn hidden" data-gamepad-btn="x"></div>
+				<div class="js-ls-btn hidden" data-gamepad-btn="l"></div>
+				<div class="js-ls-btn hidden" data-gamepad-btn="r"></div>
+				<div class="js-ls-btn hidden" data-gamepad-btn="="></div>
+				<div class="js-ls-btn hidden" data-gamepad-btn="-"></div>
+				<div class="js-ls-btn hidden" data-gamepad-btn="z"></div>
 			</div>
-			<div class="lockscreen__back">(B) Back</div>
-			<div class="lockscreen__three lockscreen__btn">
-				<p>Press the same button three times</p>
-				<p>
-					<span></span>
-					<span></span>
-					<span></span>
+			<div class="lockscreen__back" data-gamepad-btn="b">(B) Back</div>
+			<div class="three-press js-ls-btn">
+				<p class="three-press__text">Press the same button three times</p>
+				<p class="three-dots">
+					<span class="three-press__dot"></span>
+					<span class="three-press__dot"></span>
+					<span class="three-press__dot"></span>
 				</p>
 			</div>
 		</div>
-		<div class="home menu hidden"></div>
-		<div class="hold menu hidden"></div>
-	</div>
+		<div id="home"class="home menu flex hidden">
+			<div class="home__container flex">
+				<div class="topbar flex">
+					<div class="topbar__users" data-js-hover="general">
+						<div class="topbar__user" data-init="friends"></div>
+					</div>
+					<div class="status flex">
+						<div class="status__time"></div>
+						<div class="status__wifi">三</div>
+						<div class="status__battery">🔌</div>
+					</div>
+				</div>
+				<div class="home__games flex" data-js-hover="games">
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+					<div class="home__game js-home-item"></div>
+				</div>
+				<nav class="home__buttons flex" data-js-hover="general">
+					<button class="home__button home__button--nso js-home-item" data-init="nso">O</button>
+					<button class="home__button js-home-item" data-init="news">N</button>
+					<button class="home__button js-home-item" data-init="eshop">E</button>
+					<button class="home__button js-home-item" data-init="album">A</button>
+					<button class="home__button js-home-item" data-context="controllers">C</button>
+					<button class="home__button js-home-item" data-init="settings">S</button>
+					<button class="home__button js-home-item" data-context="settings">L</button>
+				</nav>
+				<div class="transition"></div>
+			</div>
+			<nav class="bottombar flex">
+				<p>[----]</p>
+				<div class="option-btns flex">
+					<div class="option-btns__c flex hidden" data-js-btn="album">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Filter</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Delete</p>
+						</div>
+					</div>
+					<div class="option-btns__c flex hidden" data-js-btn="games">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Options</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Start</p>
+						</div>
+					</div>
+					<div class="btn-text btn-text flex js-ls-btn hidden" data-gamepad-btn="a" data-js-btn="friends">
+						<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="20" cy="20" r="20" fill="white"/>
+							<path d="M9.82714 9.34844H14.2909L19.6283 19.0004H19.8413L25.1787 9.34844H29.6425L21.7057 23.0274V31.1666H17.7639V23.0274L9.82714 9.34844Z" fill="#232323"/>
+						</svg>
+						<p class="btn-text__text">Update</p>
+					</div>
+					<div class="btn-text btn-text flex js-ls-btn hidden" data-gamepad-btn="a" data-open="unlock">
+						<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="20" cy="20" r="20" fill="#232323"/>
+							<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+						</svg>
+						<p class="btn-text__text">Close</p>
+					</div>
+					<div class="option-btns__c flex" data-js-btn="general">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Back</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">OK</p>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<section id="settings" class="sidebar-content menu flex hidden">
+			<div class="sidebar-content__header flex">System Settings</div>
+			<div class="sidebar-content__container flex">
+				<div class="sidebar">
+					<div class="sidebar__menu-list">
+						<div class="menu-item sidebar__menu-item sidebar__menu-item--selected">Support/Health & Safety</div>
+					</div>
+					<div class="sidebar__menu-list">
+						<div class="menu-item sidebar__menu-item">Airplane Mode</div>
+						<div class="menu-item sidebar__menu-item">Screen Brightness</div>
+						<div class="menu-item sidebar__menu-item">Bluetooth Audio</div>
+						<div class="menu-item sidebar__menu-item">Screen Lock</div>
+					</div>
+					<div class="sidebar__menu-list">
+						<div class="menu-item sidebar__menu-item">Parental Controls</div>
+						<div class="menu-item sidebar__menu-item">Internet</div>
+						<div class="menu-item sidebar__menu-item">Data Management</div>
+						<div class="menu-item sidebar__menu-item">Users</div>
+						<div class="menu-item sidebar__menu-item">Mii</div>
+						<div class="menu-item sidebar__menu-item">Amiibo</div>
+					</div>
+					<div class="sidebar__menu-list">
+						<div class="menu-item sidebar__menu-item">Themes</div>
+						<div class="menu-item sidebar__menu-item">Notifications</div>
+						<div class="menu-item sidebar__menu-item">Sleep Mode</div>
+					</div>
+					<div class="sidebar__menu-list">
+						<div class="menu-item sidebar__menu-item">Controllers and Sensors</div>
+						<div class="menu-item sidebar__menu-item">TV Settings</div>
+						<div class="menu-item sidebar__menu-item">System</div>
+					</div>
+				</div>
+				<div class="contents">
+					<div class="contents__page support">
+						<p class="contents__item fornow">For more information about how to use Nintendo Switch and it's features, please refer to the Nintendo Support website on your smart device or PC.</p>
+						<div class="contents__item white flex">
+							<p class="fornow">suport.nintendo.com/switch/help</p>
+							<p class="">Nintendo of America Inc.</p>
+							<p class="">4600 150th Ave NE Redmond, WA 98052</p>
+						</div>
+						<div class="contents__item contents__menu-list">
+							<div class="menu-item contents__menu-item">Safety Precautions</div>
+							<div class="menu-item contents__menu-item">Error History</div>
+						</div>
+						<ol class="contents__item error-info">
+							<li class="error-info__error">1</li>
+							<li class="error-info__error">12</li>
+							<li class="error-info__error">123</li>
+							<li class="error-info__error">1234</li>
+							<li class="error-info__error">12345</li>
+							<li class="error-info__error">123456</li>
+							<li class="error-info__error">1234567</li>
+							<li class="error-info__error">12345678</li>
+						</ol>
+					</div>
+					<div class="hidden contents__page air-mode">
+						<div class="menu-item contents__menu-item">Airplane Mode</div>
+						<p class="menu-item-info">All wireless communication, such as WI-FI and Bluetooth, will be turned off. Some types of wireless communication can still be switched on manually when the console is in Airplane Mode.
+							<br />
+							<br />
+							<span class="menu-item-info__list">This can also be changed from Quick Settings (hold *).</span>
+						</p>
+					</div>
+					<div class="hidden contents__page screen-brightness">
+						<div class="menu-item contents__menu-item">Auto Brightness</div>
+						<div class="menu-item contents__menu-ite">*-----------------</div>
+						<p class="menu-item-info menu-item-info__list">This can also be changed from Quick Settings (hold *.)</p>
+					</div>
+					<div class="hidden contents__page bluetooth">
+						<div class="menu-item contents__menu-item">Pair Device</div>
+						<p class="menu-item-info">
+							To use Bluetooth audio, you must first pair a device.
+							<br />
+							<br />
+							<span class="menu-item-info__list">Up to two wireless controllers can connect while using Bluetooth audio.</span>
+							<span class="menu-item-info__list">Bluetooth audio will be disconnected during local communication</span>
+							<span class="menu-item-info__list">Bluetooth microphones cannot be used.</span>
+							<span class="menu-item-info__list">You may experience audio latency depending on your Bluetooth device.</span>
+						</p>
+					</div>
+					<div class="hidden contents__page screenlock">
+						<div class="menu-item contents__menu-item">Lock Console in Sleep Mode</div>
+						<p class="menu-item-info">Lock the console so that the same button must be pressed three times to proceed when you exit sleep mode. The console will not lock when connected to a TV</p>
+					</div>
+					<div class="hidden contents__page parental">
+						<div class="contents__menu-list">
+							<div class="contents__item contents__icon-text flex">
+								<div class="contents__icon">hi</div>
+								<div class="contents__text fornow">Parental Controls can be used to restrict features of this console. Configure these on the console or using your smart device.</div>
+							</div>
+							<div class="menu-item contents__menu-item">Watch a Nintendo Switch Parental Controls Introductory Video</div>
+						</div>
+						<div class="menu-item contents__menu-item">Parental Controls Settings</div>
+					</div>
+					<div class="hidden contents__page internet">
+						<div class="menu-item contents__menu-item">Internet Settings</div>
+						<div class="menu-item contents__menu-item">Test Connection</div>
+					</div>
+					<div class="hidden contents__page data">
+						<div class="menu-item contents__menu-item">Move Data Between System / microSD Card</div>
+						<div class="menu-item contents__menu-item">Quick Archive</div>
+						<p class="menu-item-info">Free up space by archiving the selected software.</p>
+						<div class="menu-item contents__menu-item">Manage Software</div>
+						<div class="menu-item contents__menu-item">Save Data Cloud</div>
+						<div class="menu-item contents__menu-item">Transfer Your Save Data</div>
+						<div class="menu-item contents__menu-item">Manage Screenshots And Videos</div>
+						<div class="menu-item contents__menu-item">Delete Save Data</div>
+					</div>
+					<div class="hidden contents__page users">
+						<div class="menu-item contents__menu-item">Skip Selection Screen</div>
+						<div class="menu-item contents__menu-item">Add User</div>
+						<div class="menu-item contents__menu-item">Transfer Your User Data</div>
 
+					</div>
+					<div class="hidden contents__page mii">
+						<div class="contents__item contents__icon-text flex">
+							<div class="contents__icon"></div>
+							<p class="contents__text fornow">You can create your own custom Mii characters.<br />Mii characters can be used in compatible software.</p>
+						</div>
+						<div class="menu-item contents__menu-item">Create/Edit a Mii</div>
+					</div>
+					<div class="hidden contents__page amiibo">
+						<div class="contents__item contents__icon-text flex">
+							<div class="contents__icon">hi</div>
+							<p class="contents__text fornow">You can edit and delete data saved to amiibo.</p>
+						</div>
+						<div class="menu-item contents__menu-item">Register Owner And Nickname</div>
+						<div class="menu-item contents__menu-item">Delete Game Data</div>
+						<div class="menu-item contents__menu-item">Reset Amiibo</div>
+					</div>
+					<div class="hidden contents__page themes"></div>
+					<div class="hidden contents__page notifications">
+						<div class="contents__menu-list">
+							<div class="menu-item contents__menu-item">"Download Complete" Notifications</div>
+							<div class="menu-item contents__menu-item">Friend Notifications</div>
+							<div class="menu-item contents__menu-item">Platinum Point Notificatons</div>
+						</div>
+						<div class="menu-item contents__menu-item">Alarm Notifications</div>
+						<p class="menu-item-info">After setting an alarm, you will get a notification at the date and time of your choosing.</p>
+						<div class="menu-item contents__menu-item">Notificaton Sound</div>
+					</div>
+					<div class="hidden contents__page sleep">
+						<div class="contents__menu-list">
+							<div class="menu-item contents__menu-item">Auto-Sleep Playing on Console Screen</div>
+							<div class="menu-item contents__menu-item">Auto-Sleep Connected to TV</div>
+						</div>
+						<div class="contents__menu-list">
+							<div class="menu-item contents__menu-item">Suspend Auto-Sleep While Playing Media Content</div>
+							<p class="menu-item-info">Prevents auto-sleep from activating while media content is playing.<br />If this option is disabled, the console will still go to sleep after four hours of media playback.</p>
+							<div class="menu-item contents__menu-item">Maintain Internet Connection in Sleep Mode</div>
+							<p class="menu-item-info">If this option is enabled, downloads from your PC or smartphone will start right away, even when the console is in sleep mode. Disabling this option will reduce the console's energy consumption during sleep mode while connected to the Internet.</p>
+							<div class="menu-item contents__menu-item">Wake When AC Adapter Is Disconnected</div>
+							<p class="menu-item-info">If this option is enabled, the console will wake up from sleep mode when it is removed from the dock.</p>
+						</div>
+					</div>
+					<div class="hidden contents__page controllers">
+						<div class="menu-item contents__menu-item">Change Grip/Order</div>
+						<div class="menu-item contents__menu-item">Change Button Mapping</div>
+						<p class="menu-item-info">You can customize button mapping for each controller. Customized mapping configurations can be saved as presets for easy access in the future.</p>
+						<div class="menu-item contents__menu-item">Controller Vibration</div>
+						<p class="menu-item-info">The vibration feature will be enabled on supporting controllers during gameplay. Vibration for alarm notifications can be changed in Notifications => Alarm Notifications.</p>
+						<div class="menu-item contents__menu-item">Pro Controller Wired Communication</div>
+						<p class="menu-item-info">If this option is enabled, the Nintendo Switch Pro Controller will communicate with the console via wired communication when connected to it using the USB charging cable. The NFC touchpoint on the Pro Controlller will be disabled while the controller is using wired communication.</p>
+						<div class="menu-item contents__menu-item">Update Controllers</div>
+						<p class="menu-item-info">Update connected controllers.<br />Some controllers cannot be updated.</p>
+						<div class="contents__menu-list">
+							<div class="menu-item contents__menu-item">Calibrate Control Sticks</div>
+							<div class="menu-item contents__menu-item">Calibrate Motion Controls</div>
+						</div>
+						<div class="menu-item contents__menu-item">Touch-Screen Sensitivity</div>
+						<p class="menu-item-info">Using the Stylus setting increases the sensitivity of the touch screen to enhance stylus controls.</p>
+						<div class="menu-item contents__menu-item">Test Input Devices</div>
+						<p class="menu-item-info">Check for problems with the controllers or the touch screen.</p>
+						<div class="menu-item contents__menu-item">Disconnect Controllers</div>
+					</div>
+					<div class="hidden contents__page tv">
+						<div class="menu-item contents__menu-item">TV Resolution</div>
+						<div class="menu-item contents__menu-item">RGB Range</div>
+						<div class="menu-item contents__menu-item">Adjust Screen Size</div>
+						<div class="menu-item contents__menu-item">Screen Burn-In Reduction</div>
+						<div class="menu-item contents__menu-item">Match TV Power State</div>
+						<p class="menu-item-info">
+							When switching to TV mode with the console docked or when the console exits sleep mode, the TV will turn on. Turning off the TV will put the console in sleep mode.
+							<br />
+							<br />
+							<span class="menu-item-info__list">HDMI settings must also be enabled on your TV. Some TV models may be unable to use this feature.</span>
+						</p>
+						<div class="menu-item contents__menu-item">TV Sound</div>
+					</div>
+					<div class="hidden contents__page system">
+						<div class="contents__menu-list">
+							<div class="menu-item contents__menu-item">System Update</div>
+							<p class="menu-item-info">Current version: 1.0.0</p>
+							<div class="menu-item contents__menu-item">Update Dock</div>
+							<p class="menu-item-info">Update the Nintendo Switch dock firmware.</p>
+							<div class="menu-item contents__menu-item">Console Nickname</div>
+						</div>
+						<div class="menu-item contents__menu-item">Language</div>
+						<div class="menu-item contents__menu-item">Region</div>
+						<div class="menu-item contents__menu-item">Date and Time</div>
+						<p class="menu-item-info">Current date and time: 1/1/1970 0:00 a.m.</p>
+						<div class="menu-item contents__menu-item">Console Battery %</div>
+						<div class="menu-item contents__menu-item">Console Sound</div>
+						<p class="menu-item-info">You can configure sound in the TV Settings menu when the is connected to a TV.</p>
+						<div class="menu-item contents__menu-item">Mute When Headphones Are Disconnected</div>
+						<div class="menu-item contents__menu-item">Lower Max Headphone Volume</div>
+						<p class="menu-item-info">Set a maximum volume for headphones or speakers connected to the console.</p>
+						<div class="menu-item contents__menu-item">USB Keyboard</div>
+						<div class="menu-item contents__menu-item">Console-Screen Colors</div>
+						<p class="menu-item-info menu-item-info__list">This setting will not affect the colors displayed in TV mode.</p>
+						<div class="menu-item contents__menu-item">Change Display Colors</div>
+						<div class="menu-item contents__menu-item">Zoom</div>
+						<p class="menu-item-info">You can zoom in by pressing * twice quickly</p>
+						<div class="contents__menu-list">
+							<div class="menu-item contents__menu-item">Serial Information</div>
+							<div class="menu-item contents__menu-item">End-User License Agreement</div>
+							<div class="menu-item contents__menu-item">Intellectual Property Notices</div>
+							<div class="menu-item contents__menu-item">Wireless E-Label</div>
+						</div>
+						<div class="contents__menu-list">
+							<div class="menu-item contents__menu-item">Auto-Update Software</div>
+							<div class="menu-item contents__menu-item">News Channel Settings</div>
+							<div class="menu-item contents__menu-item">Share Error Information</div>
+						</div>
+						<br />
+						<br />
+						<div class="menu-item contents__menu-item">Formatting Options</div>
+					</div>
+				</div>
+			</div>
+			<nav class="bottombar flex">
+				<p>[----]</p>
+				<div class="option-btns flex">
+					<div class="option-btns__c flex hidden" data-js-btn="album">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Filter</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Delete</p>
+						</div>
+					</div>
+					<div class="option-btns__c flex hidden" data-js-btn="games">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Options</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Start</p>
+						</div>
+					</div>
+					<div class="btn-text btn-text flex js-ls-btn hidden" data-gamepad-btn="a" data-js-btn="friends">
+						<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="20" cy="20" r="20" fill="white"/>
+							<path d="M9.82714 9.34844H14.2909L19.6283 19.0004H19.8413L25.1787 9.34844H29.6425L21.7057 23.0274V31.1666H17.7639V23.0274L9.82714 9.34844Z" fill="#232323"/>
+						</svg>
+						<p class="btn-text__text">Update</p>
+					</div>
+					<div class="btn-text btn-text flex js-ls-btn hidden" data-gamepad-btn="a" data-open="unlock">
+						<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="20" cy="20" r="20" fill="#232323"/>
+							<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+						</svg>
+						<p class="btn-text__text">Close</p>
+					</div>
+					<div class="option-btns__c flex" data-js-btn="general">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Back</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">OK</p>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</section>
+		<!-- 
+			.sidebar-content
+				.sidebar-content__sidebar
+					.sidebar__menu-list
+						.sidebar__menu-item
+
+				.sidebar-content__contents
+		 -->
+		<section id="friends" class="sidebar-content menu flex hidden">
+			<div class="sidebar-content__header flex">:D Web's Pages</div>
+			<div class="sidebar-content__container flex">
+				<div class="sidebar">
+					<div class="sidebar__menu-list">
+						<div class="menu-item sidebar__menu-item">Profile</div>
+					</div>
+					<div class="sidebar__menu-list">
+						<div class="menu-item sidebar__menu-item">Friend List</div>
+						<div class="menu-item sidebar__menu-item">Trending</div>
+						<div class="menu-item sidebar__menu-item">Online Play Invites</div>
+						<div class="menu-item sidebar__menu-item">Friend Suggestions</div>
+						<div class="menu-item sidebar__menu-item sidebar__menu-item--selected">Add Friend</div>
+					</div>
+					<div class="sidebar__menu-list">
+						<div class="menu-item sidebar__menu-item">User Settings</div>
+					</div>
+				</div>
+				<div class="contents">
+					<div class="hidden contents__page profile"></div>
+					<div class="hidden contents__page friend-list"></div>
+					<div class="hidden contents__page trending"></div>
+					<div class="hidden contents__page online-play"></div>
+					<div class="hidden contents__page friend-suggest"></div>
+					<div class="contents__page add-friend">
+						<div class="contents__menu-list">
+							<div class="menu-item contents__menu-item">Received Friend Requests</div>
+						</div>
+						<div class="menu-item contents__menu-item">Search for Local Users</div>
+						<div class="menu-item contents__menu-item">Search for Uses You Played With</div>
+						<div class="menu-item contents__menu-item">Search with Friend Code</div>
+						<div class="menu-item contents__menu-item">Sent Friend Requests</div>
+						<div class="menu-item-info menu-item-info--pos-right">Your firend code: SW-0000-0000-0000</div>
+					</div>
+					<div class="hidden contents__page user-settings">
+						<div class="contents__menu-list">
+							<div class="contents__menu-header">Profile Settings</div>
+							<div class="menu-item contents__menu-item">Nickname</div>
+							<div class="menu-item contents__menu-item">Edit Icon</div>
+							<div class="menu-item contents__menu-item">Play Activity Settings</div>
+						</div>
+						<div class="contents__menu-list">
+							<div class="contents__menu-header">Nintendo Account (ns***@a****)</div>
+							<div class="menu-item contents__menu-item">Check Your Account Information</div>
+							<div class="menu-item contents__menu-item">Display QR Code to Check In</div>
+						</div>
+						<div class="contents__menu-list">
+							<div class="contents__menu-header">Nintendo Switch Online</div>
+							<div class="menu-item contents__menu-item">Check Your Subscriptions</div>
+						</div>
+						<div class="contents__menu-list">
+							<div class="contents__menu-header">Nintendo eShop</div>
+							<div class="menu-item contents__menu-item">Nintendo eShop Settings</div>
+							<p class="menu-item-info">Check your payment methods, redownloadable software, and more.</p>
+							<div class="menu-item contents__menu-item">Update Download Progress</div>
+						</div>
+						<div class="contents__menu-list">
+							<div class="contents__menu-header">Friend Functions</div>
+							<div class="menu-item contents__menu-item">Friend Settings</div>
+							<div class="menu-item contents__menu-item">Manage Blocked-User List</div>
+						</div>
+						<div class="contents__menu-list">
+							<div class="contents__menu-header">Album</div>
+							<div class="menu-item contents__menu-item">Posting to Social Media</div>
+						</div>
+						<div class="contents__menu-list">
+							<div class="contents__menu-header">User Support</div>
+							<div class="menu-item contents__menu-item">Number for Customer Support</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav class="bottombar flex">
+				<p>[----]</p>
+				<div class="option-btns flex">
+					<div class="option-btns__c flex hidden" data-js-btn="album">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Filter</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Delete</p>
+						</div>
+					</div>
+					<div class="option-btns__c flex hidden" data-js-btn="games">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Options</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Start</p>
+						</div>
+					</div>
+					<div class="btn-text btn-text flex js-ls-btn hidden" data-gamepad-btn="a" data-js-btn="friends">
+						<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="20" cy="20" r="20" fill="white"/>
+							<path d="M9.82714 9.34844H14.2909L19.6283 19.0004H19.8413L25.1787 9.34844H29.6425L21.7057 23.0274V31.1666H17.7639V23.0274L9.82714 9.34844Z" fill="#232323"/>
+						</svg>
+						<p class="btn-text__text">Update</p>
+					</div>
+					<div class="btn-text btn-text flex js-ls-btn hidden" data-gamepad-btn="a" data-open="unlock">
+						<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="20" cy="20" r="20" fill="#232323"/>
+							<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+						</svg>
+						<p class="btn-text__text">Close</p>
+					</div>
+					<div class="option-btns__c flex" data-js-btn="general">
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">Back</p>
+						</div>
+						<div class="btn-text btn-text flex js-ls-btn" data-gamepad-btn="a" data-open="unlock">
+							<svg class="btn-text__btn" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="20" cy="20" r="20" fill="#232323"/>
+								<path d="M14.1205 29.8334H9.90171L17.5828 8.01519H22.4621L30.1538 29.8334H25.9351L20.1077 12.4896H19.9372L14.1205 29.8334ZM14.259 21.2787H25.7646V24.4534H14.259V21.2787Z" fill="white"/>
+							</svg>
+							<p class="btn-text__text">OK</p>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</section>
+	</div>
 	<script>
-		const btn = document.querySelectorAll('.lockscreen__btn');
-let previousClick = null;
-let clickCounter = 0;
-function open(btnE) {
-    const PARENT = btnE.currentTarget.parentElement.classList[0];
-    document.querySelector('.news').classList.add(`news--start-${PARENT}`);
-    btn.forEach(btn => btn.removeEventListener('click', open));
-    setBtns(three);
-}
-function setBtns(func) {
-    btn.forEach(btn => btn.addEventListener('click', func));
-}
-function three(e) {
-    const currentClick = e.currentTarget;
-    if (previousClick == null)
-        previousClick = currentClick;
-    if (currentClick !== previousClick)
-        return reset();
-    clickCounter++;
-    document.querySelectorAll('.lockscreen__three span')[clickCounter - 1].classList.add('click');
-    if (clickCounter === 3)
-        return close();
-}
-function close() {
-    document.querySelector('.news').classList.remove('news--start-unlock', 'news--start-news');
-    reset();
-    btn.forEach(btn => btn.removeEventListener('click', three));
-    setBtns(open);
-}
-function reset() {
-    previousClick = null;
-    clickCounter = 0;
-    document.querySelectorAll('.lockscreen__three span').forEach(dot => dot.classList.remove('click'));
-}
-document.querySelector('.lockscreen__back').addEventListener('click', close);
-btn.forEach(btn => btn.addEventListener('click', open));
-function setBattery() {
-    navigator.getBattery()
-        .then((battery) => {
-        document.querySelector('.status__battery').innerHTML = Math.ceil(battery.level * 100) + '%';
-        if (battery.charging == true && battery.level < 1)
-            document.querySelector('.status__battery').style.color = '#00e17c';
-        else if (battery.level <= 0.2)
-            document.querySelector('.status__battery').style.color = 'red';
-        else
-            document.querySelector('.status__battery').style.color = '';
+		function reset() {
+    document.querySelectorAll('.three-press__dot').forEach(dot => dot.classList.remove('click'));
+    setClick({
+        previous: null,
+        counter: 0
     });
 }
 const checkDigits = (digits) => (digits < 10) ? '0' + digits : '' + digits;
+
+document.querySelectorAll('.sidebar__menu-item').forEach((item, ind) => item.addEventListener('click', () => {
+    document.querySelector('.sidebar__menu-item--selected').classList.remove('sidebar__menu-item--selected');
+    item.classList.add('sidebar__menu-item--selected');
+    document.querySelector('.contents__page:not(.hidden)').classList.add('hidden');
+    document.querySelectorAll('.contents__page')[ind].classList.remove('hidden');
+}));
+		const btns = document.querySelectorAll('.js-ls-btn');
+function prepBtns(btn, oldFunc, newFunc) {
+    btn.removeEventListener('click', oldFunc);
+    btn.addEventListener('click', newFunc);
+}
+const home = document.querySelector('#home');
+home.querySelectorAll('[data-init]').forEach(btn => btn.addEventListener('click', () => initMenu(btn.getAttribute('data-init'))));
+home.querySelectorAll('[data-js-hover]').forEach(hover => hover.addEventListener('mouseover', () => optBtns(hover.getAttribute('data-js-hover'))));
+function unlock() {
+    const init = document.querySelector('#lockscreen').getAttribute('data-init');
+    const where = (init === 'unlock') ? 'home' : 'news';
+    initMenu(where);
+    setTimeout(lock, 250);
+}
+function startUnlock() {
+    const where = this.getAttribute('data-open');
+    btns.forEach(btn => prepBtns(btn, startUnlock, threePress));
+    document.querySelector('.news').classList.add(`news--${where}`);
+    document.querySelector('#lockscreen').setAttribute('data-init', where);
+}
+function lock() {
+    document.querySelector('.news').classList.remove('news--news', 'news--unlock');
+    btns.forEach(btn => prepBtns(btn, threePress, startUnlock));
+    document.querySelector('.news-cards').classList.remove('news-cards--y-btn');
+    resetThreePress();
+}
+document.querySelector('.lockscreen__back').addEventListener('click', lock);
+btns.forEach(btn => btn.addEventListener('click', startUnlock));
+document.querySelector('.news .btn-text').addEventListener('click', () => document.querySelector('.news-cards').classList.add('news-cards--y-btn'));
+		function open(btnE) {
+    const PARENT = btnE.currentTarget.getAttribute('data-open');
+    console.log(PARENT);
+    document.querySelector('.news').classList.add(`news--${PARENT}`);
+    unsetBtns(open);
+    setBtns(threePress);
+}
+		function close() {
+    document.querySelector('.news').classList.remove('news--unlock', 'news--news');
+    unsetBtns(threePress);
+    setBtns(open);
+    reset();
+}
+let click = {
+    previous: null,
+    counter: 0,
+};
+function threePress(e) {
+    const currentClick = e.currentTarget;
+    if (currentClick !== click.previous && click.previous !== null)
+        return resetThreePress();
+    document.querySelectorAll('.three-press__dot')[click.counter].classList.add('three-press__dot--clicked');
+    click.previous = currentClick;
+    click.counter++;
+    if (click.counter === 3)
+        unlock();
+}
+function resetThreePress() {
+    click.previous = null;
+    click.counter = 0;
+    document.querySelectorAll('.three-press__dot').forEach(dot => dot.classList.remove('three-press__dot--clicked'));
+}
+		function refreshStatus() {
+    setTime();
+    setBattery();
+}
+;
+refreshStatus();
+setInterval(refreshStatus, (2000));
+		function initMenu(menuToOpen) {
+    document.querySelector('.transition').classList.add('play');
+    setTimeout(() => {
+        document.querySelector('.menu:not(.hidden)').classList.add('hidden');
+        document.querySelector('#' + menuToOpen).classList.remove('hidden');
+        document.querySelector('.transition').classList.remove('play');
+    }, 250);
+}
 function setTime() {
+    const STATUS_TIME = document.querySelectorAll('.status__time');
     const DATE = new Date();
     const MINUTE = checkDigits(DATE.getMinutes());
     const ananas = (DATE.getHours() >= 12) ? 'pm' : 'am';
@@ -459,14 +1504,33 @@ function setTime() {
         hour += 12;
     else
         hour = hour;
-    document.querySelector('.status__time').innerHTML = `${checkDigits(hour)}:${MINUTE}${ananas}`;
+    STATUS_TIME.forEach(st => st.innerHTML = `${checkDigits(hour)}:${MINUTE}${ananas}`);
 }
-function refreshStatus() {
-    setTime();
-    setBattery();
+function setBattery() {
+    navigator.getBattery()
+        .then((battery) => {
+        const STATUS__BATTERY = document.querySelectorAll('.status__battery');
+        STATUS__BATTERY.forEach(sb => sb.innerHTML = Math.ceil(battery.level * 100) + '%');
+        if (battery.charging == true && battery.level < 1)
+            STATUS__BATTERY.forEach(sb => sb.style.color = '#00e17c');
+        else if (battery.level <= 0.2)
+            STATUS__BATTERY.forEach(sb => sb.style.color = 'red');
+        else
+            STATUS__BATTERY.forEach(sb => sb.style.color = '');
+    });
 }
-refreshStatus();
-setInterval(refreshStatus, (1 * 1000));
+function optBtns(c) {
+    console.log(c);
+    document.querySelector('.home .option-btns__c:not(.hidden, .friends, .eshop)').classList.add('hidden');
+    document.querySelector(`.home [data-js-btn="${c}"]`).classList.remove('hidden');
+}
+		function menuItem() {
+    var _a;
+    (_a = document.querySelector('.selected')) === null || _a === void 0 ? void 0 : _a.classList.remove('selected');
+    this.classList.add('selected');
+}
+document.querySelectorAll('.js-home-item').forEach(item => item.addEventListener('click', menuItem));
+//# sourceMappingURL=menuItem.js.map
 	</script>
 </body>
 </html>
